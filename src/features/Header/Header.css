@@ -1,0 +1,51 @@
+.header {
+    background-color: whitesmoke;
+    position: relative;
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+img {
+    width: 50px;
+    height: auto;
+    margin-right: 0.5%;
+    margin-left: 0.5%;
+    margin-bottom: 0.5%;
+    margin-top: 0.5%;
+    
+}
+
+h3 {
+    color: orangered;
+
+}
+
+.search {
+    margin: 0 auto;
+}
+
+input {
+    width: 400px;
+}
+
+button {
+    background-color: orangered;
+    color: white;
+
+}
+
+button:hover {
+    background-color: red;
+    color: white;
+    
+}
+
+
+@media (max-width: 425px) {
+    input {
+        width: 100px;
+    }
+  }
