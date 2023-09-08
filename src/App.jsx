@@ -1,12 +1,18 @@
 import React from 'react';
 import Header from './features/Header/Header';
+import Card from './components/Card/Card.jsx';
+import Subreddit from './features/Subreddits/Subreddits';
+import './App.css'
 
 function App() {
   return (
     <div>
       <Header />
       <main>
-        <h1>The body goes here</h1>
+        <div className='Cards'>
+        <Card />
+        <Subreddit />
+        </div>
       </main>
     </div>
   );
