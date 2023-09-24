@@ -1,6 +1,8 @@
-.CardBox {
+.Content {
     background-color: lightgray;
-    width: 65%;
-    height: 500px;
-    margin: 3%;
+    width: 75%;
+    height: 400px;
+    margin-top: 3%;
+    margin-left: 12%;
+    
 }
