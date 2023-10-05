@@ -1,8 +1,9 @@
 .Content {
     background-color: lightgray;
-    width: 75%;
+    width: 50%;
     height: 400px;
-    margin-top: 3%;
-    margin-left: 12%;
+    margin-top: 13%;
+    margin-left: 15%;
+    position: absolute;
     
 }

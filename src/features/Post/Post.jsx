@@ -24,7 +24,7 @@ function CreatePost() {
         />
         <button className='PostButton' onClick={submitHandler}>Post</button>
       </div>
-      {submittedText && <p>You just typed: {submittedText}</p>}
+      {submittedText && <p>{submittedText}</p>}
     </>
   );
 }

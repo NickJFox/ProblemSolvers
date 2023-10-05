@@ -1,7 +1,8 @@
 .CreatePost {
     display: flex;
-    margin: 0 auto;
     margin-top: 3%;
+    right: 40%;
+    position: absolute;
 
 }
 
@@ -17,6 +18,6 @@ textarea {
     position: relative;
     top: 65px;
     height: 40px;
-    right: 220px;
+    right: 43px;
 }
 
