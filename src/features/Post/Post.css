@@ -11,6 +11,8 @@ textarea {
     width: 500px;
     height: 100px;
     margin: 0 auto;
+    font-family: 'Times New Roman', Times, serif;
+    font: 1em;
 }
 
 
