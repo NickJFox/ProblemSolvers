@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Card.css';
 import Todo from './Todo';
-import TodoForm from '/Users/nickfox/Desktop/Coding/CodeAcademy/Reddit Project/reddit/src/features/Post/Post.jsx';
+import Post from '/Users/nickfox/Desktop/Coding/CodeAcademy/Reddit Project/reddit/src/features/Post/Post.jsx';
 
 function TodoList() {
   const [todos, setTodos] = useState([]);
@@ -44,7 +44,7 @@ function TodoList() {
   return (
     <>
       <h1>What's the Plan for Today?</h1>
-      <TodoForm onSubmit={addTodo} />
+      <Post onSubmit={addTodo} />
       <Todo
         todos={todos}
         completeTodo={completeTodo}

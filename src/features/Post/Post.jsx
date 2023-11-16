@@ -1,14 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import './Post.css';
 
-function TodoForm(props) {
+function Post(props) {
   const [input, setInput] = useState(props.edit ? props.edit.value : '');
-
-  const inputRef = useRef(null);
-
-  useEffect(() => {
-    inputRef.current.focus();
-  });
 
   const handleChange = e => {
     setInput(e.target.value);
@@ -25,33 +19,31 @@ function TodoForm(props) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className='todo-form'>
+    <form onSubmit={handleSubmit} className='post-form'>
       {props.edit ? (
         <>
           <input
-            placeholder='Update your item'
+            placeholder='Edit Post'
             value={input}
             onChange={handleChange}
             name='text'
-            ref={inputRef}
-            className='todo-input edit'
+            className='post-input edit'
           />
-          <button onClick={handleSubmit} className='todo-button edit'>
+          <button onClick={handleSubmit} className='post-button edit'>
             Update
           </button>
         </>
       ) : (
         <>
           <input
-            placeholder='Add a todo'
+            placeholder='Write something here'
             value={input}
             onChange={handleChange}
             name='text'
-            className='todo-input'
-            ref={inputRef}
+            className='post-input'
           />
-          <button onClick={handleSubmit} className='todo-button'>
-            Add todo
+          <button onClick={handleSubmit} className='post-button'>
+            Post
           </button>
         </>
       )}
@@ -59,4 +51,4 @@ function TodoForm(props) {
   );
 }
 
-export default TodoForm;
+export default Post;

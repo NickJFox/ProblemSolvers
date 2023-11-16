@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import TodoForm from '/Users/nickfox/Desktop/Coding/CodeAcademy/Reddit Project/reddit/src/features/Post/Post.jsx';
+import Post from '/Users/nickfox/Desktop/Coding/CodeAcademy/Reddit Project/reddit/src/features/Post/Post.jsx';
 import { RiCloseCircleLine } from 'react-icons/ri';
 import { TiEdit } from 'react-icons/ti';
 
@@ -18,7 +18,7 @@ const Todo = ({ todos, completeTodo, removeTodo, updateTodo }) => {
   };
 
   if (edit.id) {
-    return <TodoForm edit={edit} onSubmit={submitUpdate} />;
+    return <Post edit={edit} onSubmit={submitUpdate} />;
   }
 
   return todos.map((todo, index) => (
