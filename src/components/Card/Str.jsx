@@ -3,9 +3,6 @@ import Post from '/Users/nickfox/Desktop/Coding/CodeAcademy/Reddit Project/reddi
 import { RiCloseCircleLine } from 'react-icons/ri';
 import { TiEdit } from 'react-icons/ti';
 
-// todos = content
-// todo = str
-
 const Str = ({ content, completeStr, removeStr, updateStr }) => {
   const [edit, setEdit] = useState({
     id: null,

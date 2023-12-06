@@ -3,9 +3,6 @@ import './Card.css';
 import Str from './Str';
 import Post from '/Users/nickfox/Desktop/Coding/CodeAcademy/Reddit Project/reddit/src/features/Post/Post.jsx';
 
-// todos = content
-// todo = str
-
 function Card() {
   const [content, setContent] = useState([]);
 
