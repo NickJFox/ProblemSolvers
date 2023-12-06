@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from './features/Header/Header';
-import TodoList from './components/Card/Card.jsx';
+import Card from './components/Card/Card.jsx';
 import Subreddit from './features/Subreddits/Subreddits';
 import './App.css'
 
@@ -11,7 +11,7 @@ function App() {
       <main>
         <div className='Cards'>
             <div className='PostContent'>
-        <TodoList />
+        <Card />
            </div>
         <Subreddit />
         </div>

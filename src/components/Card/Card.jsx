@@ -1,58 +1,60 @@
 import React, { useState } from 'react';
 import './Card.css';
-import Todo from './Todo';
+import Str from './Str';
 import Post from '/Users/nickfox/Desktop/Coding/CodeAcademy/Reddit Project/reddit/src/features/Post/Post.jsx';
 
-function TodoList() {
-  const [todos, setTodos] = useState([]);
+// todos = content
+// todo = str
 
-  const addTodo = todo => {
-    if (!todo.text || /^\s*$/.test(todo.text)) {
+function Card() {
+  const [content, setContent] = useState([]);
+
+  const addStr = str => {
+    if (!str.text || /^\s*$/.test(str.text)) {
       return;
     }
 
-    const newTodos = [todo, ...todos];
+    const newContent = [str, ...content];
 
-    setTodos(newTodos);
-    console.log(...todos);
+    setContent(newContent);
+    console.log(...content);
   };
 
-  const updateTodo = (todoId, newValue) => {
+  const updateStr = (strId, newValue) => {
     if (!newValue.text || /^\s*$/.test(newValue.text)) {
       return;
     }
 
-    setTodos(prev => prev.map(item => (item.id === todoId ? newValue : item)));
+    setContent(prev => prev.map(item => (item.id === strId ? newValue : item)));
   };
 
-  const removeTodo = id => {
-    const removedArr = [...todos].filter(todo => todo.id !== id);
+  const removeStr = id => {
+    const removedArr = [...content].filter(str => str.id !== id);
 
-    setTodos(removedArr);
+    setContent(removedArr);
   };
 
-  const completeTodo = id => {
-    let updatedTodos = todos.map(todo => {
-      if (todo.id === id) {
-        todo.isComplete = !todo.isComplete;
+  const completeStr = id => {
+    let updatedContent = content.map(str => {
+      if (str.id === id) {
+        str.isComplete = !str.isComplete;
       }
-      return todo;
+      return str;
     });
-    setTodos(updatedTodos);
+    setContent(updatedContent);
   };
 
   return (
     <>
-      <h1>What's the Plan for Today?</h1>
-      <Post onSubmit={addTodo} />
-      <Todo
-        todos={todos}
-        completeTodo={completeTodo}
-        removeTodo={removeTodo}
-        updateTodo={updateTodo}
+      <Post onSubmit={addStr} />
+      <Str
+        content={content}
+        completeStr={completeStr}
+        removeStr={removeStr}
+        updateStr={updateStr}
       />
     </>
   );
 }
 
-export default TodoList;
+export default Card;

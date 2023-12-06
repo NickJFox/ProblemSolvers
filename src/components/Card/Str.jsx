@@ -3,14 +3,17 @@ import Post from '/Users/nickfox/Desktop/Coding/CodeAcademy/Reddit Project/reddi
 import { RiCloseCircleLine } from 'react-icons/ri';
 import { TiEdit } from 'react-icons/ti';
 
-const Todo = ({ todos, completeTodo, removeTodo, updateTodo }) => {
+// todos = content
+// todo = str
+
+const Str = ({ content, completeStr, removeStr, updateStr }) => {
   const [edit, setEdit] = useState({
     id: null,
     value: ''
   });
 
   const submitUpdate = value => {
-    updateTodo(edit.id, value);
+    updateStr(edit.id, value);
     setEdit({
       id: null,
       value: ''
@@ -21,21 +24,21 @@ const Todo = ({ todos, completeTodo, removeTodo, updateTodo }) => {
     return <Post edit={edit} onSubmit={submitUpdate} />;
   }
 
-  return todos.map((todo, index) => (
+  return content.map((str, index) => (
     <div
-      className={todo.isComplete ? 'todo-row complete' : 'todo-row'}
+      className={str.isComplete ? 'todo-row complete' : 'todo-row'}
       key={index}
     >
-      <div key={todo.id} onClick={() => completeTodo(todo.id)}>
-        {todo.text}
+      <div key={str.id} onClick={() => completeStr(str.id)}>
+        {str.text}
       </div>
       <div className='icons'>
         <RiCloseCircleLine
-          onClick={() => removeTodo(todo.id)}
+          onClick={() => removeStr(str.id)}
           className='delete-icon'
         />
         <TiEdit
-          onClick={() => setEdit({ id: todo.id, value: todo.text })}
+          onClick={() => setEdit({ id: str.id, value: str.text })}
           className='edit-icon'
         />
       </div>
@@ -43,4 +46,4 @@ const Todo = ({ todos, completeTodo, removeTodo, updateTodo }) => {
   ));
 };
 
-export default Todo;
+export default Str;
