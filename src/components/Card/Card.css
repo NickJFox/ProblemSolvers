@@ -1,4 +1,9 @@
 .row {
-    background-color: whitesmoke;
-    margin: 5px;
+  background-color: whitesmoke;
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px;
+  height: auto;
+  max-width: 500px;
 }
