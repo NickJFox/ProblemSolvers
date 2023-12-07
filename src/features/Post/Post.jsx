@@ -22,20 +22,23 @@ function Post(props) {
     <form onSubmit={handleSubmit} className='post-form'>
       {props.edit ? (
         <>
-          <input
+        <div className='post-area'>
+          <textarea
             placeholder='Edit Post'
             value={input}
             onChange={handleChange}
             name='text'
             className='post-input edit'
           />
-          <button onClick={handleSubmit} className='post-button edit'>
+          <button onClick={handleSubmit} className='post-button-edit'>
             Update
           </button>
+          </div>
         </>
       ) : (
         <>
-          <input
+        <div className='post-area'>
+          <textarea
             placeholder='Write something here'
             value={input}
             onChange={handleChange}
@@ -45,6 +48,7 @@ function Post(props) {
           <button onClick={handleSubmit} className='post-button'>
             Post
           </button>
+          </div>
         </>
       )}
     </form>

@@ -23,7 +23,7 @@ const Str = ({ content, completeStr, removeStr, updateStr }) => {
 
   return content.map((str, index) => (
     <div
-      className={str.isComplete ? 'todo-row complete' : 'todo-row'}
+      className={str.isComplete ? 'row complete' : 'row'}
       key={index}
     >
       <div key={str.id} onClick={() => completeStr(str.id)}>

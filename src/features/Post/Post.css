@@ -22,3 +22,19 @@ textarea {
     height: 40px;
     right: 43px;
 }
+
+.post-area {
+    position: relative;
+}
+
+.post-button {
+    position: absolute;
+    right: 0;
+    bottom: 5px;
+}
+
+.post-button-edit {
+    position: absolute;
+    right: 0;
+    bottom: 5px;
+}
