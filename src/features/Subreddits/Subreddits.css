@@ -6,3 +6,12 @@
     right: 3%;
     position: absolute;
 }
+
+.subreddit-categories {
+    color: white;
+    text-align: center;
+}
+
+p {
+    margin: 15%;
+}
