@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import Post from '/Users/nickfox/Desktop/Coding/CodeAcademy/Reddit Project/reddit/src/features/Post/Post.jsx';
 import { RiCloseCircleLine } from 'react-icons/ri';
 import { TiEdit } from 'react-icons/ti';
+import { IoIosArrowUp } from "react-icons/io";
+import { IoIosArrowDown } from "react-icons/io";
+
+
 
 const Str = ({ content, completeStr, removeStr, updateStr, increment, decrement }) => {
   const [edit, setEdit] = useState({
@@ -10,7 +14,8 @@ const Str = ({ content, completeStr, removeStr, updateStr, increment, decrement 
   });
 
   const submitUpdate = value => {
-    updateStr(edit.id, value);
+    const strToUpdate = content.find(str => str.id === edit.id);
+    updateStr(edit.id, { ...value, count: strToUpdate.count });
     setEdit({
       id: null,
       value: ''
@@ -30,6 +35,7 @@ const Str = ({ content, completeStr, removeStr, updateStr, increment, decrement 
         {str.text}
       </div>
       <div className='icons'>
+        
         <RiCloseCircleLine
           onClick={() => removeStr(str.id)}
           className='delete-icon'
@@ -38,9 +44,19 @@ const Str = ({ content, completeStr, removeStr, updateStr, increment, decrement 
           onClick={() => setEdit({ id: str.id, value: str.text })}
           className='edit-icon'
         />
-        <button onClick={() => increment(str.id)}>+</button>
+
+        <IoIosArrowUp 
+        onClick={() => increment(str.id)}
+        style={{ color: str.count > 0 ? 'green' : 'black'}}
+        />
+
         <span>{str.count}</span>
-        <button onClick={() => decrement(str.id)}>-</button>
+
+        <IoIosArrowDown
+        onClick={() => decrement(str.id)}
+        style={{ color: str.count < 0 ? 'red' : 'black' }}
+        />
+
       </div>
     </div>
   ));
