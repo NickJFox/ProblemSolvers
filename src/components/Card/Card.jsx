@@ -11,11 +11,31 @@ function Card() {
       return;
     }
 
-    const newContent = [str, ...content];
+    // Adding count property to each str object
+    const newStr = { ...str, count: 0 };
+
+    const newContent = [newStr, ...content];
+
+    // Sorting the content array based on count in descending order
+    newContent.sort((a, b) => b.count - a.count);
 
     setContent(newContent);
     console.log(...content);
   };
+
+  const increment = strId => {
+    setContent(prev => prev.map(item => (item.id === strId ? { ...item, count: item.count + 1 } : item)));
+
+    // Sorting the content array based on count in descending order after incrementing
+    setContent(prev => [...prev].sort((a, b) => b.count - a.count));
+  }
+
+  const decrement = strId => {
+    setContent(prev => prev.map(item => (item.id === strId ? { ...item, count: item.count - 1 } : item)));
+
+    // Sorting the content array based on count in descending order after decrementing
+    setContent(prev => [...prev].sort((a, b) => b.count - a.count));
+  }
 
   const updateStr = (strId, newValue) => {
     if (!newValue.text || /^\s*$/.test(newValue.text)) {
@@ -23,6 +43,9 @@ function Card() {
     }
 
     setContent(prev => prev.map(item => (item.id === strId ? newValue : item)));
+
+    // Sorting the content array based on count in descending order after updating
+    setContent(prev => [...prev].sort((a, b) => b.count - a.count));
   };
 
   const removeStr = id => {
@@ -38,7 +61,9 @@ function Card() {
       }
       return str;
     });
-    setContent(updatedContent);
+
+    // Sorting the content array based on count in descending order after completing
+    setContent(updatedContent.sort((a, b) => b.count - a.count));
   };
 
   return (
@@ -49,6 +74,8 @@ function Card() {
         completeStr={completeStr}
         removeStr={removeStr}
         updateStr={updateStr}
+        increment={increment}
+        decrement={decrement}
       />
     </>
   );

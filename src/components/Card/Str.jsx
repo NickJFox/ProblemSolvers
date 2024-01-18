@@ -3,7 +3,7 @@ import Post from '/Users/nickfox/Desktop/Coding/CodeAcademy/Reddit Project/reddi
 import { RiCloseCircleLine } from 'react-icons/ri';
 import { TiEdit } from 'react-icons/ti';
 
-const Str = ({ content, completeStr, removeStr, updateStr }) => {
+const Str = ({ content, completeStr, removeStr, updateStr, increment, decrement }) => {
   const [edit, setEdit] = useState({
     id: null,
     value: ''
@@ -38,6 +38,9 @@ const Str = ({ content, completeStr, removeStr, updateStr }) => {
           onClick={() => setEdit({ id: str.id, value: str.text })}
           className='edit-icon'
         />
+        <button onClick={() => increment(str.id)}>+</button>
+        <span>{str.count}</span>
+        <button onClick={() => decrement(str.id)}>-</button>
       </div>
     </div>
   ));
