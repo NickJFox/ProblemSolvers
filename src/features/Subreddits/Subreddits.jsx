@@ -11,7 +11,7 @@ function Subreddit() {
         <p>Environment / Climate Change</p>
         <p>War / Violence</p>
         <p>Social Equality</p>
-        <p>Poverty</p>
+        <p>Poverty / Income inequality</p>
         </div>
     </div>
     );
