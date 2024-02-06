@@ -4,7 +4,7 @@ import { RiCloseCircleLine } from 'react-icons/ri';
 import { TiEdit } from 'react-icons/ti';
 import { IoIosArrowUp } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
-
+import { RiReplyFill } from "react-icons/ri";
 
 
 const Str = ({ content, completeStr, removeStr, updateStr, increment, decrement }) => {
@@ -25,6 +25,7 @@ const Str = ({ content, completeStr, removeStr, updateStr, increment, decrement 
   if (edit.id) {
     return <Post edit={edit} onSubmit={submitUpdate} />;
   }
+
 
   return content.map((str, index) => (
     <div
@@ -55,6 +56,10 @@ const Str = ({ content, completeStr, removeStr, updateStr, increment, decrement 
         <IoIosArrowDown
         onClick={() => decrement(str.id)}
         style={{ color: str.count < 0 ? 'red' : 'black' }}
+        />
+
+        <RiReplyFill 
+        
         />
 
       </div>
