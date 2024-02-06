@@ -5,13 +5,16 @@ function Subreddit() {
     return (
     <div className='subredditBox'>
         <div className='subreddit-categories'>
-        <p>Clean Water</p>
-        <p>Hunger</p>
-        <p>Health</p>
-        <p>Environment / Climate Change</p>
-        <p>War / Violence</p>
-        <p>Social Equality</p>
-        <p>Poverty / Income inequality</p>
+        <p>Technology</p>
+        <p>Science</p>
+        <p>Psychology</p>
+        <p>Education</p>
+        <p>Leadership</p>
+        <p>Creativity</p>
+        <p>Environment</p>
+        <p>Social Issues</p>
+        <p>Health & Wellness</p>
+        <p>Business & Entrepreneurship</p>
         </div>
     </div>
     );
