@@ -6,7 +6,6 @@ import { IoIosArrowUp } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
 import { RiReplyFill } from "react-icons/ri";
 
-
 const Str = ({ content, completeStr, removeStr, updateStr, increment, decrement }) => {
   const [edit, setEdit] = useState({
     id: null,
