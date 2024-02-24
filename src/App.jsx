@@ -38,7 +38,7 @@ function App() {
       <main>
         <div className='Cards'>
             <div className='PostContent'>
-        <Card />
+        
         <Comment 
         handleInsertNode={handleInsertNode}
         handleDeleteNode={handleDeleteNode}

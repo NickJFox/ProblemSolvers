@@ -17,7 +17,7 @@ const Comment = ({
   const [editMode, setEditMode] = useState(false);
   const [showInput, setShowInput] = useState(false);
   const [expand, setExpand] = useState(false);
-  const [votes, setVotes] = useState(0); // State for total votes
+  const [votes, setVotes] = useState(0); 
   const inputRef = useRef(null);
 
   useEffect(() => {
@@ -60,13 +60,13 @@ const Comment = ({
         {comment.id === 1 ? (
           <>
            {/* This is the input */}
-            <input
+            <textarea
               type="text"
               className="inputContainer__input first_input"
               autoFocus
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="type..."
+              placeholder="Write a message here..."
             />
             {/* This is the comment button*/}
             <Action
