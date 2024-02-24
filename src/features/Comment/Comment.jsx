@@ -1,185 +1,45 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { IoIosArrowUp } from "react-icons/io";
-import { IoIosArrowDown } from "react-icons/io";
-import Action from "./Action";
+// Comment.jsx
+
+import React, { useState } from 'react';
 import { RiCloseCircleLine } from 'react-icons/ri';
 import { TiEdit } from 'react-icons/ti';
-import { RiReplyFill } from "react-icons/ri";
+import { IoIosArrowUp } from "react-icons/io";
+import { IoIosArrowDown } from "react-icons/io";
 
-
-const Comment = ({
-  handleInsertNode,
-  handleEditNode,
-  handleDeleteNode,
-  comment,
-}) => {
-  const [input, setInput] = useState("");
+const Comment = ({ comment, removeComment, editComment, increment, decrement, count }) => {
   const [editMode, setEditMode] = useState(false);
-  const [showInput, setShowInput] = useState(false);
-  const [expand, setExpand] = useState(false);
-  const [votes, setVotes] = useState(0); 
-  const inputRef = useRef(null);
+  const [editedComment, setEditedComment] = useState(comment);
 
-  useEffect(() => {
-    inputRef?.current?.focus();
-  }, [editMode]);
-
-  const handleNewComment = () => {
-    setExpand(!expand);
-    setShowInput(true);
+  const handleEdit = () => {
+    setEditMode(true);
+    setEditedComment(comment);
   };
 
-  const handleUpvote = () => {
-    setVotes(votes + 1);
-  };
-
-  const handleDownvote = () => {
-    setVotes(votes - 1);
-  };
-
-  const onAddComment = () => {
-    if (editMode) {
-      handleEditNode(comment.id, inputRef?.current?.innerText);
-    } else {
-      setExpand(true);
-      handleInsertNode(comment.id, input);
-      setShowInput(false);
-      setInput("");
-    }
-
-    if (editMode) setEditMode(false);
-  };
-
-  const handleDelete = () => {
-    handleDeleteNode(comment.id);
+  const handleSave = () => {
+    editComment(editedComment);
+    setEditMode(false);
   };
 
   return (
-    <div>
-      <div className={comment.id === 1 ? "inputContainer" : "commentContainer"}>
-        {comment.id === 1 ? (
-          <>
-           {/* This is the input */}
-            <textarea
-              type="text"
-              className="inputContainer__input first_input"
-              autoFocus
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              placeholder="Write a message here..."
-            />
-            {/* This is the comment button*/}
-            <Action
-              className="reply comment"
-              type="COMMENT"
-              handleClick={onAddComment}
-            />
-          </>
-        ) : (
-          <>
-            <span
-              contentEditable={editMode}
-              suppressContentEditableWarning={editMode}
-              ref={inputRef}
-              style={{ wordWrap: "break-word" }}
-            >
-              {comment.name}
-            </span>
-
-            <div style={{ display: "flex", marginTop: "5px" }}>
-              {editMode ? (
-                <>
-                  <Action
-                    className="reply"
-                    type="SAVE"
-                    handleClick={onAddComment}
-                  />
-                  <Action
-                    className="reply"
-                    type="CANCEL"
-                    handleClick={() => {
-                      if (inputRef.current)
-                        inputRef.current.innerText = comment.name;
-                      setEditMode(false);
-                    }}
-                  />
-                </>
-              ) : (
-                <>
-                  <Action
-                    className="reply"
-                    type={
-                      <>
-                        {expand ? (
-                          <IoIosArrowUp width="10px" height="10px" />
-                        ) : (
-                          <IoIosArrowDown width="10px" height="10px" />
-                        )}{" "}
-                        <RiReplyFill />
-                      </>
-                    }
-                    handleClick={handleNewComment}
-                  />
-                  <Action
-                    className="reply"
-                    type={<TiEdit />}
-                    handleClick={() => {
-                      setEditMode(true);
-                    }}
-                  />
-                  <Action
-                    className="reply"
-                    type={<RiCloseCircleLine />}
-                    handleClick={handleDelete}
-                  />
-                   <IoIosArrowUp 
-                   onClick={handleUpvote} 
-                   style={{ color: votes > 0 ? 'green' : 'black' }}
-                   />
-                  <span>{votes}</span>
-                  <IoIosArrowDown 
-                  onClick={handleDownvote} 
-                  style={{ color: votes < 0 ? 'red' : 'black' }}
-                  />
-                </>
-              )}
-            </div>
-          </>
-        )}
-      </div>
-
-      <div style={{ display: expand ? "block" : "none", paddingLeft: 25 }}>
-        {showInput && (
-          <div className="inputContainer">
-            <input
-              type="text"
-              className="inputContainer__input"
-              autoFocus
-              onChange={(e) => setInput(e.target.value)}
-            />
-            <Action className="reply" type="REPLY" handleClick={onAddComment} />
-            <Action
-              className="reply"
-              type="CANCEL"
-              handleClick={() => {
-                setShowInput(false);
-                if (!comment?.items?.length) setExpand(false);
-              }}
-            />
-          </div>
-        )}
-
-        {comment?.items?.map((cmnt) => {
-          return (
-            <Comment
-              key={cmnt.id}
-              handleInsertNode={handleInsertNode}
-              handleEditNode={handleEditNode}
-              handleDeleteNode={handleDeleteNode}
-              comment={cmnt}
-            />
-          );
-        })}
+    <div className="comment">
+      {editMode ? (
+        <div>
+          <input
+            type="text"
+            value={editedComment}
+            onChange={(e) => setEditedComment(e.target.value)}
+          />
+          <button onClick={handleSave}>Save</button>
+        </div>
+      ) : (
+        <div>{comment}</div>
+      )}
+      <div className="icons">
+        <RiCloseCircleLine onClick={removeComment} className="delete-icon" />
+        <TiEdit onClick={handleEdit} className="edit-icon" />
+        <IoIosArrowUp onClick={increment} style={{ color: count > 0 ? 'green' : 'black'}} />
+        <span>{count}</span>
+        <IoIosArrowDown onClick={decrement} style={{ color: count < 0 ? 'red' : 'black'}} />
       </div>
     </div>
   );
