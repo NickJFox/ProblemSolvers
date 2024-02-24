@@ -2,6 +2,10 @@ import React, { useState, useRef, useEffect } from 'react';
 import { IoIosArrowUp } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
 import Action from "./Action";
+import { RiCloseCircleLine } from 'react-icons/ri';
+import { TiEdit } from 'react-icons/ti';
+import { RiReplyFill } from "react-icons/ri";
+
 
 const Comment = ({
   handleInsertNode,
@@ -13,6 +17,7 @@ const Comment = ({
   const [editMode, setEditMode] = useState(false);
   const [showInput, setShowInput] = useState(false);
   const [expand, setExpand] = useState(false);
+  const [votes, setVotes] = useState(0); // State for total votes
   const inputRef = useRef(null);
 
   useEffect(() => {
@@ -22,6 +27,14 @@ const Comment = ({
   const handleNewComment = () => {
     setExpand(!expand);
     setShowInput(true);
+  };
+
+  const handleUpvote = () => {
+    setVotes(votes + 1);
+  };
+
+  const handleDownvote = () => {
+    setVotes(votes - 1);
   };
 
   const onAddComment = () => {
@@ -102,22 +115,31 @@ const Comment = ({
                         ) : (
                           <IoIosArrowDown width="10px" height="10px" />
                         )}{" "}
-                        REPLY
+                        <RiReplyFill />
                       </>
                     }
                     handleClick={handleNewComment}
                   />
                   <Action
                     className="reply"
-                    type="EDIT"
+                    type={<TiEdit />}
                     handleClick={() => {
                       setEditMode(true);
                     }}
                   />
                   <Action
                     className="reply"
-                    type="DELETE"
+                    type={<RiCloseCircleLine />}
                     handleClick={handleDelete}
+                  />
+                   <IoIosArrowUp 
+                   onClick={handleUpvote} 
+                   style={{ color: votes > 0 ? 'green' : 'black' }}
+                   />
+                  <span>{votes}</span>
+                  <IoIosArrowDown 
+                  onClick={handleDownvote} 
+                  style={{ color: votes < 0 ? 'red' : 'black' }}
                   />
                 </>
               )}
