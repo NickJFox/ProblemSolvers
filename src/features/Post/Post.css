@@ -28,8 +28,9 @@ textarea {
 }
 
 .post-button {
-    position: absolute;
-    right: 0;
+    position: relative;
+    right: 43px;
+    height: 20px;
     bottom: 5px;
 }
 

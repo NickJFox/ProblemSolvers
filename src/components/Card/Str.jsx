@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Post from '/Users/nickfox/Desktop/Coding/CodeAcademy/Reddit Project/reddit/src/features/Post/Post.jsx';
 import Comment from '/Users/nickfox/Desktop/Coding/CodeAcademy/Reddit Project/reddit/src/features/Comment/Comment.jsx';
 import { FaRegTrashCan } from "react-icons/fa6";
 import { TiEdit } from 'react-icons/ti';
-import { IoIosArrowUp } from "react-icons/io";
-import { IoIosArrowDown } from "react-icons/io";
+import { TbArrowBigDown } from "react-icons/tb";
+import { TbArrowBigUp } from "react-icons/tb";
 import { RiReplyFill } from "react-icons/ri";
 import { FaRegComment } from "react-icons/fa";
 
@@ -17,7 +17,9 @@ const Str = ({ content, completeStr, removeStr, updateStr, increment, decrement 
   const [newComment, setNewComment] = useState('');
   const [replyingToStrId, setReplyingToStrId] = useState(null);
   const [showComments, setShowComments] = useState(content.map(() => true)); // State to track individual show/hide comments
+  const [numberOfComments, setNumberOfComments] = useState({}); // State to store the number of comments for each str.id
 
+  // Function to toggle comments visibility
   const toggleComments = (index) => {
     setShowComments(prevState => {
       const newState = [...prevState];
@@ -26,6 +28,7 @@ const Str = ({ content, completeStr, removeStr, updateStr, increment, decrement 
     });
   };
 
+  // Function to handle adding a comment
   const handleAddComment = (postId) => {
     if (newComment.trim() === '') return; // Prevent adding empty comments
     setComments(prevComments => ({
@@ -36,6 +39,7 @@ const Str = ({ content, completeStr, removeStr, updateStr, increment, decrement 
     setReplyingToStrId(null); // Hide the input field after adding the comment
   };
 
+  // Function to handle removing a comment
   const handleRemoveComment = (postId, commentIndex) => {
     setComments(prevComments => ({
       ...prevComments,
@@ -43,6 +47,7 @@ const Str = ({ content, completeStr, removeStr, updateStr, increment, decrement 
     }));
   };
 
+  // Function to handle editing a comment
   const handleEditComment = (postId, commentIndex, editedComment) => {
     setComments(prevComments => ({
       ...prevComments,
@@ -54,6 +59,18 @@ const Str = ({ content, completeStr, removeStr, updateStr, increment, decrement 
       })
     }));
   };
+
+  useEffect(() => {
+    const calculateTotalComments = () => {
+      const totalComments = {};
+      Object.keys(comments).forEach(strId => {
+        totalComments[strId] = comments[strId].length;
+      });
+      return totalComments;
+    };
+
+    setNumberOfComments(calculateTotalComments());
+  }, [comments]);
 
   const submitUpdate = value => {
     const strToUpdate = content.find(str => str.id === edit.id);
@@ -75,14 +92,23 @@ const Str = ({ content, completeStr, removeStr, updateStr, increment, decrement 
           <div className={str.isComplete ? 'row complete' : 'row'} key={index}>
             <div onClick={() => completeStr(str.id)}>{str.text}</div>
             <div className='icons'>
-              <IoIosArrowUp onClick={() => increment(str.id)} style={{ color: str.count > 0 ? 'green' : 'black'}} />
+              <TbArrowBigUp onClick={() => increment(str.id)} style={{ color: 'black', fill: str.count > 0 ? '#04db37' : 'none', stroke: 'black' }} />
               <span>{str.count}</span>
-              <IoIosArrowDown onClick={() => decrement(str.id)} style={{ color: str.count < 0 ? 'red' : 'black' }} />
+              <TbArrowBigDown onClick={() => decrement(str.id)} style={{color: 'black', fill: str.count < 0 ? '#f03b35' : 'none', stroke: 'black' }} />
+              
+              {/* Delete */}
+              <div onClick={() => removeStr(str.id)} style={{ display: 'inline-flex', alignItems: 'center', cursor: 'pointer' }}>
+                <FaRegTrashCan className='delete-icon' style={{ marginLeft: '25px' }}/>
+                <span style={{ marginLeft: '5px' }}>Delete</span>
+              </div>
 
-              <FaRegTrashCan onClick={() => removeStr(str.id)} className='delete-icon' style={{marginLeft: '35px'}}/>
+              {/* Edit */}
+              <div onClick={() => setEdit({ id: str.id, value: str.text })} style={{ display: 'inline-flex', alignItems: 'center', cursor: 'pointer' }}>
+                <TiEdit className='edit-icon' style={{ marginLeft: '25px' }} />
+                <span style={{ marginLeft: '5px' }}>Edit</span>
+              </div>
 
-
-              <TiEdit onClick={() => setEdit({ id: str.id, value: str.text })} className='edit-icon' style={{marginLeft: '35px'}}/>
+              {/* Reply */}
               {replyingToStrId === str.id ? (
                 <div>
                   <input
@@ -94,11 +120,17 @@ const Str = ({ content, completeStr, removeStr, updateStr, increment, decrement 
                   <button onClick={() => handleAddComment(str.id)}>Add</button>
                 </div>
               ) : (
-                <RiReplyFill onClick={() => setReplyingToStrId(str.id)} style={{marginLeft: '35px'}}/>
+                <div onClick={() => setReplyingToStrId(str.id)} style={{ display: 'inline-flex', alignItems: 'center', cursor: 'pointer' }}>
+                  <RiReplyFill style={{ marginLeft: '25px' }} />
+                  <span style={{ marginLeft: '5px' }}>Reply</span>
+                </div>
               )}
-        
-              <FaRegComment onClick={() => toggleComments(index)} style={{marginLeft: '35px'}}/>
-             
+
+              {/* Comments */}
+              <div onClick={() => toggleComments(index)} style={{ display: 'inline-flex', alignItems: 'center', cursor: 'pointer' }}>
+                <FaRegComment style={{ marginLeft: '25px' }} />
+                <span style={{ marginLeft: '5px' }}>{numberOfComments[str.id] || 0} Comments</span>
+              </div>
             </div>
             {showComments[index] && comments[str.id] && (
               <div>
