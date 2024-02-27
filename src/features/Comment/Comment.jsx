@@ -1,7 +1,5 @@
-// Comment.jsx
-
 import React, { useState } from 'react';
-import { RiCloseCircleLine } from 'react-icons/ri';
+import { FaRegTrashCan } from "react-icons/fa6";
 import { TiEdit } from 'react-icons/ti';
 import { IoIosArrowUp } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
@@ -35,11 +33,11 @@ const Comment = ({ comment, removeComment, editComment, increment, decrement, co
         <div>{comment}</div>
       )}
       <div className="icons">
-        <RiCloseCircleLine onClick={removeComment} className="delete-icon" />
-        <TiEdit onClick={handleEdit} className="edit-icon" />
         <IoIosArrowUp onClick={increment} style={{ color: count > 0 ? 'green' : 'black'}} />
         <span>{count}</span>
         <IoIosArrowDown onClick={decrement} style={{ color: count < 0 ? 'red' : 'black'}} />
+        <FaRegTrashCan onClick={removeComment} className="delete-icon" />
+        <TiEdit onClick={handleEdit} className="edit-icon" />
       </div>
     </div>
   );

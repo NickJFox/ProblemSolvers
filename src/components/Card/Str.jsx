@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Post from '/Users/nickfox/Desktop/Coding/CodeAcademy/Reddit Project/reddit/src/features/Post/Post.jsx';
 import Comment from '/Users/nickfox/Desktop/Coding/CodeAcademy/Reddit Project/reddit/src/features/Comment/Comment.jsx';
-import { RiCloseCircleLine } from 'react-icons/ri';
+import { FaRegTrashCan } from "react-icons/fa6";
 import { TiEdit } from 'react-icons/ti';
 import { IoIosArrowUp } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
@@ -75,11 +75,14 @@ const Str = ({ content, completeStr, removeStr, updateStr, increment, decrement 
           <div className={str.isComplete ? 'row complete' : 'row'} key={index}>
             <div onClick={() => completeStr(str.id)}>{str.text}</div>
             <div className='icons'>
-              <RiCloseCircleLine onClick={() => removeStr(str.id)} className='delete-icon' />
-              <TiEdit onClick={() => setEdit({ id: str.id, value: str.text })} className='edit-icon' />
               <IoIosArrowUp onClick={() => increment(str.id)} style={{ color: str.count > 0 ? 'green' : 'black'}} />
               <span>{str.count}</span>
               <IoIosArrowDown onClick={() => decrement(str.id)} style={{ color: str.count < 0 ? 'red' : 'black' }} />
+
+              <FaRegTrashCan onClick={() => removeStr(str.id)} className='delete-icon' style={{marginLeft: '35px'}}/>
+
+
+              <TiEdit onClick={() => setEdit({ id: str.id, value: str.text })} className='edit-icon' style={{marginLeft: '35px'}}/>
               {replyingToStrId === str.id ? (
                 <div>
                   <input
@@ -91,11 +94,11 @@ const Str = ({ content, completeStr, removeStr, updateStr, increment, decrement 
                   <button onClick={() => handleAddComment(str.id)}>Add</button>
                 </div>
               ) : (
-                <RiReplyFill onClick={() => setReplyingToStrId(str.id)} />
+                <RiReplyFill onClick={() => setReplyingToStrId(str.id)} style={{marginLeft: '35px'}}/>
               )}
-              <button onClick={() => toggleComments(index)}>
-              <FaRegComment />
-              </button>
+        
+              <FaRegComment onClick={() => toggleComments(index)} style={{marginLeft: '35px'}}/>
+             
             </div>
             {showComments[index] && comments[str.id] && (
               <div>
