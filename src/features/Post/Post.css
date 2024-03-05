@@ -13,6 +13,7 @@ textarea {
     margin: 0 auto;
     font-family: 'Times New Roman', Times, serif;
     font: 1em;
+    background-color: #ffffff;
 }
 
 
@@ -36,6 +37,6 @@ textarea {
 
 .post-button-edit {
     position: absolute;
-    right: 0;
+    right: 43px;
     bottom: 5px;
 }

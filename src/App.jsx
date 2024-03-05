@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Header from './features/Header/Header';
 import Card from './components/Card/Card.jsx';
 import Subreddit from './features/Subreddits/Subreddits';

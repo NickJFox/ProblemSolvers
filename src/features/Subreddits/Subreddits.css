@@ -10,8 +10,11 @@
 .subreddit-categories {
     color: white;
     text-align: center;
+    background-color: orangered;
+   
 }
 
 p {
     margin: 15%;
+    background-color: orangered;
 }

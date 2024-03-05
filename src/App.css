@@ -1,15 +1,21 @@
 .Cards {
     display: flex;
+    
+}
+
+* {
+  background-color: rgb(214, 214, 214);
 }
 
 .PostContent {
     margin: 0 auto;
     margin-top: 50px;
+    
 }
 
 .commentContainer {
     margin-top: 6px;
-    background-color: #d3d3d3e0;
+    background-color: #ffff;
     display: flex;
     flex-direction: column;
     padding: 5px 10px;
@@ -19,13 +25,14 @@
   }
   
   .commentContainer:hover {
-    background-color: #d3d3d3bf;
+    background-color: #ffff;
   }
   
   .inputContainer {
     display: flex;
     align-items: baseline;
     gap: 5px;
+    
   }
   
   .inputContainer > span {
@@ -41,7 +48,7 @@
     justify-content: space-between;
     cursor: pointer;
     border-radius: 5px;
-    background-color: #e7e7e7;
+    background-color: #ffff;
   }
   
   .first_input {
@@ -50,6 +57,7 @@
   
   .commentContainer > span {
     margin: 0 5px;
+    
   }
   
   .reply {
@@ -63,7 +71,7 @@
   
   .comment {
     color: black;
-    background-color: white;
+    background-color: #ffff;
     letter-spacing: 0.8px;
     padding: 15px;
     border: 1px solid black;
@@ -73,4 +81,8 @@
   .icons {
     padding: 10px;
     margin-top: 20px;
+  }
+
+  .str-container {
+    background-color: #ffff;
   }
