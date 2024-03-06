@@ -6,6 +6,12 @@
 
 }
 
+.str-content {
+    position: absolute;
+    left: 300px;
+    width: 100%;
+}
+
 textarea {
     resize: none;
     width: 520px;
@@ -26,6 +32,7 @@ textarea {
 
 .post-area {
     position: relative;
+    margin-right: 200px;
 }
 
 .post-button {

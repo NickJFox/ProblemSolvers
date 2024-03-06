@@ -18,6 +18,7 @@ const Str = ({ content, completeStr, removeStr, updateStr, increment, decrement 
   const [replyingToStrId, setReplyingToStrId] = useState(null);
   const [showComments, setShowComments] = useState(content.map(() => true)); // State to track individual show/hide comments
   const [numberOfComments, setNumberOfComments] = useState({}); // State to store the number of comments for each str.id
+  // eslint-disable-next-line
   const [showAddCommentInput, setShowAddCommentInput] = useState(false);
 
   // Function to toggle comments visibility
@@ -96,6 +97,7 @@ const Str = ({ content, completeStr, removeStr, updateStr, increment, decrement 
             <div style={{ backgroundColor: '#ffff' }} className='icons'>
               <TbArrowBigUp 
                 onClick={() => increment(str.id)} 
+                size={25}
                 style={{ 
                   color: 'black', 
                   fill: str.count > 0 ? '#04db37' : 'none', 
@@ -103,8 +105,9 @@ const Str = ({ content, completeStr, removeStr, updateStr, increment, decrement 
                   backgroundColor: 'white' 
                 }} 
               />
-              <span style={{ backgroundColor: 'white' }}>{str.count}</span>
+              <span style={{ backgroundColor: 'white', fontSize: '25px' }}>{str.count}</span>
               <TbArrowBigDown 
+              size={25}
                 onClick={() => decrement(str.id)} 
                 style={{
                   color: 'black',
@@ -127,7 +130,8 @@ const Str = ({ content, completeStr, removeStr, updateStr, increment, decrement 
               </div>
 
               {/* Reply */}
-              <div onClick={() => {
+              <div 
+              onClick={() => {
                 setReplyingToStrId(str.id); // Set replyingToStrId
                 setShowAddCommentInput(true); // Show the input field for adding a comment
               }} style={{ display: 'inline-flex', alignItems: 'center', cursor: 'pointer', backgroundColor: 'white' }}>

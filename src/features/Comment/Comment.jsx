@@ -21,7 +21,7 @@ const Comment = ({ comment, removeComment, editComment, increment, decrement, co
   return (
     <div className="comment" style={{ backgroundColor: 'white', padding: '10px', marginBottom: '10px' }}>
       {editMode ? (
-        <div>
+        <div style={{ backgroundColor: 'white' }}>
           <input
             type="text"
             value={editedComment}
@@ -37,34 +37,38 @@ const Comment = ({ comment, removeComment, editComment, increment, decrement, co
       <div className="icons" style={{ display: 'flex', alignItems: 'center', backgroundColor: 'white', marginTop: '10px' }}>
         <div onClick={increment} style={{ display: 'inline-flex', alignItems: 'center', cursor: 'pointer', backgroundColor: 'white' }}>
           <TbArrowBigUp 
+            size={18}
             style={{ 
-              color: count > 0 ? '#04db37' : 'black', 
-              marginRight: '5px', 
+              color: 'black', 
+              fill: count > 0 ? '#04db37' : 'none', 
+              stroke: 'black', 
               backgroundColor: 'white' 
             }} 
           />
         </div>
-        <span style={{ backgroundColor: 'white' }}>{count}</span>
+        <span style={{ backgroundColor: 'white', fontSize: '18px' }}>{count}</span>
         <div onClick={decrement} style={{ display: 'inline-flex', alignItems: 'center', cursor: 'pointer', backgroundColor: 'white' }}>
-          <TbArrowBigDown 
-            style={{ 
-              color: count < 0 ? '#f03b35' : 'black', 
-              marginLeft: '5px', 
-              backgroundColor: 'white' 
-            }} 
+          <TbArrowBigDown
+            size={18} 
+            style={{
+              color: 'black',
+              fill: count < 0 ? '#f03b35' : 'none',
+              stroke: 'black',
+              backgroundColor: 'white'
+            }}
           />
         </div>
         <div onClick={removeComment} style={{ display: 'inline-flex', alignItems: 'center', cursor: 'pointer', backgroundColor: 'white' }}>
           <FaRegTrashCan 
             className="delete-icon" 
-            style={{ marginLeft: '5px', backgroundColor: 'white' }} 
+            style={{ marginLeft: '25px', backgroundColor: 'white' }} 
           />
           <span style={{ marginLeft: '5px', backgroundColor: 'white' }}>Delete</span>
         </div>
         <div onClick={handleEdit} style={{ display: 'inline-flex', alignItems: 'center', cursor: 'pointer', backgroundColor: 'white' }}>
           <TiEdit 
             className="edit-icon" 
-            style={{ marginLeft: '5px', backgroundColor: 'white' }} 
+            style={{ marginLeft: '25px', backgroundColor: 'white' }} 
           />
           <span style={{ marginLeft: '5px', backgroundColor: 'white' }}>Edit</span>
         </div>
