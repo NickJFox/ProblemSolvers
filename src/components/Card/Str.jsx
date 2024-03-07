@@ -21,6 +21,36 @@ const Str = ({ content, completeStr, removeStr, updateStr, increment, decrement 
   // eslint-disable-next-line
   const [showAddCommentInput, setShowAddCommentInput] = useState(false);
 
+  // Function to calculate time since a given timestamp
+  const timeSince = (date) => {
+    const seconds = Math.floor((new Date() - date) / 1000);
+    let interval = Math.floor(seconds / 31536000);
+  
+    if (interval > 1) {
+      return `${interval} years ago`;
+    }
+    interval = Math.floor(seconds / 2592000);
+    if (interval > 1) {
+      return `${interval} months ago`;
+    }
+    interval = Math.floor(seconds / 86400);
+    if (interval > 1) {
+      return `${interval} days ago`;
+    }
+    interval = Math.floor(seconds / 3600);
+    if (interval > 1) {
+      return `${interval} hours ago`;
+    }
+    interval = Math.floor(seconds / 60);
+    if (interval >= 1 && interval < 2) {
+      return `1 minute ago`;
+    } else if (interval >= 2) {
+      return `${interval} minutes ago`;
+    }
+    return `${Math.floor(seconds)} seconds ago`;
+  };
+  
+
   // Function to toggle comments visibility
   const toggleComments = (index) => {
     setShowComments(prevState => {
@@ -35,7 +65,7 @@ const Str = ({ content, completeStr, removeStr, updateStr, increment, decrement 
     if (newComment.trim() === '') return; // Prevent adding empty comments
     setComments(prevComments => ({
       ...prevComments,
-      [postId]: [...(prevComments[postId] || []), { text: newComment, count: 0 }]
+      [postId]: [...(prevComments[postId] || []), { text: newComment, count: 0, timestamp: new Date() }]
     }));
     setNewComment(''); // Clear the input field after adding the comment
     setReplyingToStrId(null); // Reset replyingToStrId
@@ -50,18 +80,19 @@ const Str = ({ content, completeStr, removeStr, updateStr, increment, decrement 
     }));
   };
 
-  // Function to handle editing a comment
-  const handleEditComment = (postId, commentIndex, editedComment) => {
-    setComments(prevComments => ({
-      ...prevComments,
-      [postId]: prevComments[postId].map((comment, index) => {
-        if (index === commentIndex) {
-          return editedComment;
-        }
-        return comment;
-      })
-    }));
-  };
+// Function to handle editing a comment
+const handleEditComment = (postId, commentIndex, editedComment) => {
+  editedComment.timestamp = new Date(); // Update the timestamp of the edited comment
+  setComments(prevComments => ({
+    ...prevComments,
+    [postId]: prevComments[postId].map((comment, index) => {
+      if (index === commentIndex) {
+        return editedComment;
+      }
+      return comment;
+    })
+  }));
+};
 
   useEffect(() => {
     const calculateTotalComments = () => {
@@ -77,7 +108,7 @@ const Str = ({ content, completeStr, removeStr, updateStr, increment, decrement 
 
   const submitUpdate = value => {
     const strToUpdate = content.find(str => str.id === edit.id);
-    updateStr(edit.id, { ...value, count: strToUpdate.count });
+    updateStr(edit.id, { ...value, count: strToUpdate.count, timestamp: new Date() });
     setEdit({
       id: null,
       value: ''
@@ -93,6 +124,11 @@ const Str = ({ content, completeStr, removeStr, updateStr, increment, decrement 
       <div className="str-content"  >
         {content.map((str, index) => (
           <div className={str.isComplete ? 'row complete' : 'row'} key={index} >
+            <div style={{ backgroundColor: '#ffff', display: 'flex', alignItems: 'center', marginBottom: '5px' }}>
+              <img src="/avatar.png" alt="Avatar" style={{ width: '24px', height: '24px', marginRight: '5px', backgroundColor: 'white' }} />
+              <span style={{ backgroundColor: 'white', fontWeight: 'bold'}}>SkyWalker23</span>
+              <span style={{ marginLeft: '5px', backgroundColor: 'white', fontWeight: 'thin', fontSize: '11px' }}>{timeSince(new Date(str.timestamp))}</span> {/* Displaying time since the post */}
+            </div>
             <div style={{ backgroundColor: '#ffff' }} onClick={() => completeStr(str.id)}>{str.text}</div>
             <div style={{ backgroundColor: '#ffff' }} className='icons'>
               <TbArrowBigUp 
@@ -169,6 +205,7 @@ const Str = ({ content, completeStr, removeStr, updateStr, increment, decrement 
                   .sort((a, b) => b.count - a.count)
                   .map((comment, commentIndex) => (
                     <Comment
+                      timestamp={comment.timestamp} // Pass timestamp here
                       key={commentIndex}
                       comment={comment.text}
                       count={comment.count}

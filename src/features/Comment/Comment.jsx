@@ -4,7 +4,7 @@ import { TiEdit } from 'react-icons/ti';
 import { TbArrowBigDown } from "react-icons/tb";
 import { TbArrowBigUp } from "react-icons/tb";
 
-const Comment = ({ comment, removeComment, editComment, increment, decrement, count }) => {
+const Comment = ({ comment, removeComment, editComment, increment, decrement, count, timestamp }) => {
   const [editMode, setEditMode] = useState(false);
   const [editedComment, setEditedComment] = useState(comment);
 
@@ -18,8 +18,43 @@ const Comment = ({ comment, removeComment, editComment, increment, decrement, co
     setEditMode(false);
   };
 
+  // Function to calculate time since a given timestamp
+  const timeSince = (date) => {
+    const seconds = Math.floor((new Date() - date) / 1000);
+    let interval = Math.floor(seconds / 31536000);
+  
+    if (interval > 1) {
+      return `${interval} years ago`;
+    }
+    interval = Math.floor(seconds / 2592000);
+    if (interval > 1) {
+      return `${interval} months ago`;
+    }
+    interval = Math.floor(seconds / 86400);
+    if (interval > 1) {
+      return `${interval} days ago`;
+    }
+    interval = Math.floor(seconds / 3600);
+    if (interval > 1) {
+      return `${interval} hours ago`;
+    }
+    interval = Math.floor(seconds / 60);
+    if (interval >= 1 && interval < 2) {
+      return `1 minute ago`;
+    } else if (interval >= 2) {
+      return `${interval} minutes ago`;
+    }
+    return `${Math.floor(seconds)} seconds ago`;
+  };
+  
+
   return (
     <div className="comment" style={{ backgroundColor: 'white', padding: '10px', marginBottom: '10px' }}>
+<div style={{ backgroundColor: 'white', marginBottom: '5px', display: 'flex', alignItems: 'center' }}>
+  <img src="/avatar.png" alt="Avatar" style={{backgroundColor: 'white', width: '24px', height: '24px', marginRight: '5px', verticalAlign: 'middle' }} />
+  <span style={{ backgroundColor: 'white', fontWeight: 'bold'}}>SkyWalker23</span>
+  <span style={{ marginLeft: '5px', backgroundColor: 'white', fontWeight: 'thin', fontSize: '11px' }}>{timeSince(new Date(timestamp))}</span>
+</div>
       {editMode ? (
         <div style={{ backgroundColor: 'white' }}>
           <input
@@ -78,5 +113,3 @@ const Comment = ({ comment, removeComment, editComment, increment, decrement, co
 };
 
 export default Comment;
-
-
