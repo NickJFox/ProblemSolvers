@@ -7,7 +7,6 @@ import { TbArrowBigDown } from "react-icons/tb";
 import { TbArrowBigUp } from "react-icons/tb";
 import { RiReplyFill } from "react-icons/ri";
 import { FaRegComment } from "react-icons/fa";
-import SearchBar from '../../features/Header/SearchBar';
 import { timeSince } from '../../utils/timesince';
 
 const Str = ({ content, completeStr, removeStr, updateStr, increment, decrement }) => {
@@ -19,9 +18,7 @@ const Str = ({ content, completeStr, removeStr, updateStr, increment, decrement 
   const [newComment, setNewComment] = useState('');
   const [replyingToStrId, setReplyingToStrId] = useState(null);
   const [showComments, setShowComments] = useState(content.map(() => true)); // State to track individual show/hide comments
-  const [numberOfComments, setNumberOfComments] = useState({}); // State to store the number of comments for each str.id
-  const [searchQuery, setSearchQuery] = useState(''); // State to hold the search query
-  
+  const [numberOfComments, setNumberOfComments] = useState({}); // State to store the number of comments for each str.id  
 
   // Function to toggle comments visibility
   const toggleComments = (index) => {
@@ -90,20 +87,10 @@ const Str = ({ content, completeStr, removeStr, updateStr, increment, decrement 
     return <Post edit={edit} onSubmit={submitUpdate} />;
   }
 
-  // Filtering content based on search query
-  const filteredContent = content.filter(str => str.text.toLowerCase().includes(searchQuery.toLowerCase()));
-
   return (
     <div className="str-container" >
-      <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-      <input
-        type="text"
-        placeholder="Search..."
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-      />
       <div className="str-content"  >
-        {filteredContent.map((str, index) => (
+        {content.map((str, index) => (
           <div className={str.isComplete ? 'row complete' : 'row'} key={index} >
             <div style={{ backgroundColor: '#ffff', display: 'flex', alignItems: 'center', marginBottom: '5px' }}>
               <img src="/avatar.png" alt="Avatar" style={{ width: '24px', height: '24px', marginRight: '5px', backgroundColor: 'white' }} />
