@@ -8,6 +8,7 @@ import { TbArrowBigUp } from "react-icons/tb";
 import { RiReplyFill } from "react-icons/ri";
 import { FaRegComment } from "react-icons/fa";
 import SearchBar from '../../features/Header/SearchBar';
+import { timeSince } from '../../utils/timesince';
 
 const Str = ({ content, completeStr, removeStr, updateStr, increment, decrement }) => {
   const [edit, setEdit] = useState({
@@ -20,35 +21,6 @@ const Str = ({ content, completeStr, removeStr, updateStr, increment, decrement 
   const [showComments, setShowComments] = useState(content.map(() => true)); // State to track individual show/hide comments
   const [numberOfComments, setNumberOfComments] = useState({}); // State to store the number of comments for each str.id
   const [searchQuery, setSearchQuery] = useState(''); // State to hold the search query
-
-  // Function to calculate time since a given timestamp
-  const timeSince = (date) => {
-    const seconds = Math.floor((new Date() - date) / 1000);
-    let interval = Math.floor(seconds / 31536000);
-  
-    if (interval > 1) {
-      return `${interval} years ago`;
-    }
-    interval = Math.floor(seconds / 2592000);
-    if (interval > 1) {
-      return `${interval} months ago`;
-    }
-    interval = Math.floor(seconds / 86400);
-    if (interval > 1) {
-      return `${interval} days ago`;
-    }
-    interval = Math.floor(seconds / 3600);
-    if (interval > 1) {
-      return `${interval} hours ago`;
-    }
-    interval = Math.floor(seconds / 60);
-    if (interval >= 1 && interval < 2) {
-      return `1 minute ago`;
-    } else if (interval >= 2) {
-      return `${interval} minutes ago`;
-    }
-    return `${Math.floor(seconds)} seconds ago`;
-  };
   
 
   // Function to toggle comments visibility

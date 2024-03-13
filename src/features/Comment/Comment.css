@@ -1,0 +1,64 @@
+.comment {
+    background-color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  #username {
+    font-weight: bold;
+  }
+
+  #timestamp {
+    margin-left: 5px;
+    font-weight: thin;
+    font-size: 11px;
+  }
+
+  #commentDiv {
+    background-color: white;
+  }
+  
+  .comment-header {
+    background-color: white;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .avatar {
+    background-color: white;
+    width: 24px;
+    height: 24px;
+    margin-right: 5px;
+    vertical-align: middle;
+  }
+  
+  .comment-header span {
+    background-color: white;
+  }
+  
+  .icons {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    margin-top: 10px;
+  }
+  
+  .icon-container {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    background-color: white;
+  }
+  
+  .delete-icon,
+  .edit-icon {
+    margin-left: 25px;
+    background-color: white;
+  }
+
+  #edit,
+  #delete {
+    background-color: white;
+  }
+  
