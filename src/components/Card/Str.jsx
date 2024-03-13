@@ -7,6 +7,7 @@ import { TbArrowBigDown } from "react-icons/tb";
 import { TbArrowBigUp } from "react-icons/tb";
 import { RiReplyFill } from "react-icons/ri";
 import { FaRegComment } from "react-icons/fa";
+import SearchBar from '../../features/Header/SearchBar';
 
 const Str = ({ content, completeStr, removeStr, updateStr, increment, decrement }) => {
   const [edit, setEdit] = useState({
@@ -18,8 +19,7 @@ const Str = ({ content, completeStr, removeStr, updateStr, increment, decrement 
   const [replyingToStrId, setReplyingToStrId] = useState(null);
   const [showComments, setShowComments] = useState(content.map(() => true)); // State to track individual show/hide comments
   const [numberOfComments, setNumberOfComments] = useState({}); // State to store the number of comments for each str.id
-  // eslint-disable-next-line
-  const [showAddCommentInput, setShowAddCommentInput] = useState(false);
+  const [searchQuery, setSearchQuery] = useState(''); // State to hold the search query
 
   // Function to calculate time since a given timestamp
   const timeSince = (date) => {
@@ -69,7 +69,6 @@ const Str = ({ content, completeStr, removeStr, updateStr, increment, decrement 
     }));
     setNewComment(''); // Clear the input field after adding the comment
     setReplyingToStrId(null); // Reset replyingToStrId
-    setShowAddCommentInput(false); // Hide the input field for adding a comment
   };
 
   // Function to handle removing a comment
@@ -80,19 +79,19 @@ const Str = ({ content, completeStr, removeStr, updateStr, increment, decrement 
     }));
   };
 
-// Function to handle editing a comment
-const handleEditComment = (postId, commentIndex, editedComment) => {
-  editedComment.timestamp = new Date(); // Update the timestamp of the edited comment
-  setComments(prevComments => ({
-    ...prevComments,
-    [postId]: prevComments[postId].map((comment, index) => {
-      if (index === commentIndex) {
-        return editedComment;
-      }
-      return comment;
-    })
-  }));
-};
+  // Function to handle editing a comment
+  const handleEditComment = (postId, commentIndex, editedComment) => {
+    editedComment.timestamp = new Date(); // Update the timestamp of the edited comment
+    setComments(prevComments => ({
+      ...prevComments,
+      [postId]: prevComments[postId].map((comment, index) => {
+        if (index === commentIndex) {
+          return editedComment;
+        }
+        return comment;
+      })
+    }));
+  };
 
   useEffect(() => {
     const calculateTotalComments = () => {
@@ -119,10 +118,20 @@ const handleEditComment = (postId, commentIndex, editedComment) => {
     return <Post edit={edit} onSubmit={submitUpdate} />;
   }
 
+  // Filtering content based on search query
+  const filteredContent = content.filter(str => str.text.toLowerCase().includes(searchQuery.toLowerCase()));
+
   return (
     <div className="str-container" >
+      <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+      <input
+        type="text"
+        placeholder="Search..."
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+      />
       <div className="str-content"  >
-        {content.map((str, index) => (
+        {filteredContent.map((str, index) => (
           <div className={str.isComplete ? 'row complete' : 'row'} key={index} >
             <div style={{ backgroundColor: '#ffff', display: 'flex', alignItems: 'center', marginBottom: '5px' }}>
               <img src="/avatar.png" alt="Avatar" style={{ width: '24px', height: '24px', marginRight: '5px', backgroundColor: 'white' }} />
@@ -169,7 +178,6 @@ const handleEditComment = (postId, commentIndex, editedComment) => {
               <div 
               onClick={() => {
                 setReplyingToStrId(str.id); // Set replyingToStrId
-                setShowAddCommentInput(true); // Show the input field for adding a comment
               }} style={{ display: 'inline-flex', alignItems: 'center', cursor: 'pointer', backgroundColor: 'white' }}>
                 <RiReplyFill style={{ marginLeft: '25px', backgroundColor: 'white' }} />
                 <span style={{ marginLeft: '5px', backgroundColor: 'white' }}>Reply</span>
@@ -181,8 +189,8 @@ const handleEditComment = (postId, commentIndex, editedComment) => {
                 <span style={{ marginLeft: '5px', backgroundColor: 'white' }}>{numberOfComments[str.id] || 0} Comments</span>
               </div>
             </div>
-     {/* Input for adding a comment */}
-     {replyingToStrId === str.id && (
+            {/* Input for adding a comment */}
+            {replyingToStrId === str.id && (
               <div style={{ backgroundColor: '#ffff', display: 'flex', alignItems: 'center' }}>
                 <input
                   type="text"
@@ -194,7 +202,6 @@ const handleEditComment = (postId, commentIndex, editedComment) => {
                 <button onClick={() => {
                   setNewComment(''); // Clear the input field
                   setReplyingToStrId(null); // Reset replyingToStrId
-                  setShowAddCommentInput(false); // Hide the input field for adding a comment
                 }}>Cancel</button>
               </div>
             )}
