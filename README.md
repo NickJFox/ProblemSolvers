@@ -1,3 +1,7 @@
+# ProblemSolvers
+
+## Frontend project of a social media forum to dicuss a range of important global topics.  
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
