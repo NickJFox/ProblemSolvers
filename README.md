@@ -1,6 +1,6 @@
 # ProblemSolvers
 
-## Frontend project of a social media forum to dicuss a range of important global topics.  
+### Frontend project of a social media forum to dicuss a range of important global topics.  
 
 # Getting Started with Create React App
 
