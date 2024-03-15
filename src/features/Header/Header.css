@@ -10,16 +10,20 @@
 
 img {
     width: 50px;
-    height: auto;
-    margin-right: 0.5%;
-    margin-left: 0.5%;
-    margin-bottom: 0.5%;
-    margin-top: 0.5%;
+    height: 50px;
+    margin-right: 10px;
+    margin-left: 5px;
+    margin-top: 5px;
+    background-color: white;
     
 }
 
+a {
+    background-color: white;
+}
+
 h3 {
-    color: orangered;
+    color: #2B3595;
     background-color: #ffffff;
 
 }
@@ -32,18 +36,6 @@ h3 {
 input {
     width: 400px;
     background-color: whitesmoke;
-}
-
-button {
-    background-color: orangered;
-    color: #ffffff;;
-
-}
-
-button:hover {
-    background-color: red;
-    color: white;
-    
 }
 
 

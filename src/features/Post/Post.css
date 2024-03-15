@@ -28,6 +28,8 @@ textarea {
     top: 65px;
     height: 40px;
     right: 43px;
+    background-color: #2B3595;
+    color: white;
 }
 
 .post-area {
@@ -40,10 +42,14 @@ textarea {
     right: 43px;
     height: 20px;
     bottom: 5px;
+    background-color: #2B3595;
+    color: white;
 }
 
 .post-button-edit {
     position: absolute;
     right: 43px;
     bottom: 5px;
+    background-color: #2B3595;
+    color: white;
 }

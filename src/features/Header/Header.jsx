@@ -6,8 +6,12 @@ function Header({ searchQuery, setSearchQuery }) {
 
   return (
     <div className='header'>
-      <img alt="" src="/logo.png"/>
-      <h3>REDDIT</h3>
+      <a href="/">
+        <img alt="" src="/ProblemSolversLogo.jpg"/>
+      </a>
+      <a href="/">
+      <h3>ProblemSolvers</h3>
+      </a>
       <div className='search'>
       <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       </div>

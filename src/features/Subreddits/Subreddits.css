@@ -1,5 +1,5 @@
 .subredditBox {
-    background-color: orangered;
+    background-color: #2B3595;
     width: 300px;
     height: 600px;
     margin-top: 3%;
@@ -10,11 +10,17 @@
 .subreddit-categories {
     color: white;
     text-align: center;
-    background-color: orangered;
+    background-color: #2B3595;
     padding: 1px;
 }
 
 p {
     margin: 15%;
-    background-color: orangered;
+    background-color: #2B3595;
 }
+
+a {
+        text-decoration: none;
+        color: white;
+}
+    
