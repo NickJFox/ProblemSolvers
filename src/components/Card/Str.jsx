@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Post from '/Users/nickfox/Desktop/Coding/CodeAcademy/Reddit Project/reddit/src/features/Post/Post.jsx';
-import Comment from '/Users/nickfox/Desktop/Coding/CodeAcademy/Reddit Project/reddit/src/features/Comment/Comment.jsx';
+import Post from '../../features/Post/Post';
+import Comment from '../../features/Comment/Comment'
 import { FaRegTrashCan } from "react-icons/fa6";
 import { TiEdit } from 'react-icons/ti';
 import { TbArrowBigDown } from "react-icons/tb";

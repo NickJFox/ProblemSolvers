@@ -3,8 +3,8 @@ import { FaRegTrashCan } from "react-icons/fa6";
 import { TiEdit } from 'react-icons/ti';
 import { TbArrowBigDown } from "react-icons/tb";
 import { TbArrowBigUp } from "react-icons/tb";
-import { timeSince } from '../../utils/timesince'; // Import timeSince function
-import './Comment.css'; // Import CSS file
+import { timeSince } from '../../utils/timesince';
+import './Comment.css';
 
 const Comment = ({ comment, removeComment, editComment, increment, decrement, count, timestamp }) => {
   const [editMode, setEditMode] = useState(false);

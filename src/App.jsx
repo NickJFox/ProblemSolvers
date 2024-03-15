@@ -2,11 +2,8 @@ import React, { useState } from 'react';
 import Header from './features/Header/Header';
 import Subreddit from './features/Subreddits/Subreddits';
 import './App.css';
-
 import Str from './components/Card/Str.jsx';
-import Post from '/Users/nickfox/Desktop/Coding/CodeAcademy/Reddit Project/reddit/src/features/Post/Post.jsx';
-
-
+import Post from './features/Post/Post.jsx';
 
 function App() {
   const [content, setContent] = useState([]);
