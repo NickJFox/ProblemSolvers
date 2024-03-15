@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './Card.css';
 import Str from './Str';
 import Post from '/Users/nickfox/Desktop/Coding/CodeAcademy/Reddit Project/reddit/src/features/Post/Post.jsx';
+import SearchBar from '../../features/Header/SearchBar';
 
 function Card() {
   const [content, setContent] = useState([]);
@@ -78,12 +79,7 @@ function Card() {
 
   return (
     <>
-      <input
-        type="text"
-        placeholder="Search..."
-        value={searchQuery}
-        onChange={e => setSearchQuery(e.target.value)}
-      />
+      <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       <Post onSubmit={addStr} />
       <Str
         content={filteredContent}
